@@ -7,19 +7,27 @@ export interface PreferencesStore {
   enableAutoplay: boolean;
   enableSkipCredits: boolean;
   enableDiscover: boolean;
+  enableFeatured: boolean;
   enableDetailsModal: boolean;
+  enableImageLogos: boolean;
+  enableCarouselView: boolean;
   sourceOrder: string[];
   enableSourceOrder: boolean;
   proxyTmdb: boolean;
+  febboxKey: string | null;
 
   setEnableThumbnails(v: boolean): void;
   setEnableAutoplay(v: boolean): void;
   setEnableSkipCredits(v: boolean): void;
   setEnableDiscover(v: boolean): void;
+  setEnableFeatured(v: boolean): void;
   setEnableDetailsModal(v: boolean): void;
+  setEnableImageLogos(v: boolean): void;
+  setEnableCarouselView(v: boolean): void;
   setSourceOrder(v: string[]): void;
   setEnableSourceOrder(v: boolean): void;
   setProxyTmdb(v: boolean): void;
+  setFebboxKey(v: string | null): void;
 }
 
 export const usePreferencesStore = create(
@@ -29,10 +37,14 @@ export const usePreferencesStore = create(
       enableAutoplay: true,
       enableSkipCredits: true,
       enableDiscover: true,
+      enableFeatured: false,
       enableDetailsModal: false,
+      enableImageLogos: true,
+      enableCarouselView: false,
       sourceOrder: [],
       enableSourceOrder: false,
       proxyTmdb: false,
+      febboxKey: null,
       setEnableThumbnails(v) {
         set((s) => {
           s.enableThumbnails = v;
@@ -53,9 +65,24 @@ export const usePreferencesStore = create(
           s.enableDiscover = v;
         });
       },
+      setEnableFeatured(v) {
+        set((s) => {
+          s.enableFeatured = v;
+        });
+      },
       setEnableDetailsModal(v) {
         set((s) => {
           s.enableDetailsModal = v;
+        });
+      },
+      setEnableImageLogos(v) {
+        set((s) => {
+          s.enableImageLogos = v;
+        });
+      },
+      setEnableCarouselView(v) {
+        set((s) => {
+          s.enableCarouselView = v;
         });
       },
       setSourceOrder(v) {
@@ -71,6 +98,11 @@ export const usePreferencesStore = create(
       setProxyTmdb(v) {
         set((s) => {
           s.proxyTmdb = v;
+        });
+      },
+      setFebboxKey(v) {
+        set((s) => {
+          s.febboxKey = v;
         });
       },
     })),

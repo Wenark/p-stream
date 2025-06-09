@@ -131,8 +131,8 @@ export function SettingsPage() {
   const backendUrlSetting = useAuthStore((s) => s.backendUrl);
   const setBackendUrl = useAuthStore((s) => s.setBackendUrl);
 
-  const febboxToken = useAuthStore((s) => s.febboxToken);
-  const setFebboxToken = useAuthStore((s) => s.setFebboxToken);
+  const febboxKey = usePreferencesStore((s) => s.febboxKey);
+  const setFebboxKey = usePreferencesStore((s) => s.setFebboxKey);
 
   const enableThumbnails = usePreferencesStore((s) => s.enableThumbnails);
   const setEnableThumbnails = usePreferencesStore((s) => s.setEnableThumbnails);
@@ -151,10 +151,16 @@ export function SettingsPage() {
   const enableDiscover = usePreferencesStore((s) => s.enableDiscover);
   const setEnableDiscover = usePreferencesStore((s) => s.setEnableDiscover);
 
+  const enableFeatured = usePreferencesStore((s) => s.enableFeatured);
+  const setEnableFeatured = usePreferencesStore((s) => s.setEnableFeatured);
+
   const enableDetailsModal = usePreferencesStore((s) => s.enableDetailsModal);
   const setEnableDetailsModal = usePreferencesStore(
     (s) => s.setEnableDetailsModal,
   );
+
+  const enableImageLogos = usePreferencesStore((s) => s.enableImageLogos);
+  const setEnableImageLogos = usePreferencesStore((s) => s.setEnableImageLogos);
 
   const enableSourceOrder = usePreferencesStore((s) => s.enableSourceOrder);
   const setEnableSourceOrder = usePreferencesStore(
@@ -163,6 +169,11 @@ export function SettingsPage() {
 
   const proxyTmdb = usePreferencesStore((s) => s.proxyTmdb);
   const setProxyTmdb = usePreferencesStore((s) => s.setProxyTmdb);
+
+  const enableCarouselView = usePreferencesStore((s) => s.enableCarouselView);
+  const setEnableCarouselView = usePreferencesStore(
+    (s) => s.setEnableCarouselView,
+  );
 
   const account = useAuthStore((s) => s.account);
   const updateProfile = useAuthStore((s) => s.setAccountProfile);
@@ -182,12 +193,12 @@ export function SettingsPage() {
       if (account && backendUrl) {
         const settings = await getSettings(backendUrl, account);
         if (settings.febboxKey) {
-          setFebboxToken(settings.febboxKey);
+          setFebboxKey(settings.febboxKey);
         }
       }
     };
     loadSettings();
-  }, [account, backendUrl, setFebboxToken]);
+  }, [account, backendUrl, setFebboxKey]);
 
   const state = useSettingsState(
     activeTheme,
@@ -196,16 +207,19 @@ export function SettingsPage() {
     decryptedName,
     proxySet,
     backendUrlSetting,
-    febboxToken,
+    febboxKey,
     account ? account.profile : undefined,
     enableThumbnails,
     enableAutoplay,
     enableDiscover,
+    enableFeatured,
     enableDetailsModal,
     sourceOrder,
     enableSourceOrder,
     proxyTmdb,
     enableSkipCredits,
+    enableImageLogos,
+    enableCarouselView,
   );
 
   const availableSources = useMemo(() => {
@@ -249,13 +263,35 @@ export function SettingsPage() {
         state.appLanguage.changed ||
         state.theme.changed ||
         state.proxyUrls.changed ||
-        state.febboxToken.changed
+        state.febboxKey.changed ||
+        state.enableThumbnails.changed ||
+        state.enableAutoplay.changed ||
+        state.enableSkipCredits.changed ||
+        state.enableDiscover.changed ||
+        state.enableFeatured.changed ||
+        state.enableDetailsModal.changed ||
+        state.enableImageLogos.changed ||
+        state.sourceOrder.changed ||
+        state.enableSourceOrder.changed ||
+        state.proxyTmdb.changed ||
+        state.enableCarouselView.changed
       ) {
         await updateSettings(backendUrl, account, {
           applicationLanguage: state.appLanguage.state,
           applicationTheme: state.theme.state,
           proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
-          febboxKey: state.febboxToken.state,
+          febboxKey: state.febboxKey.state,
+          enableThumbnails: state.enableThumbnails.state,
+          enableAutoplay: state.enableAutoplay.state,
+          enableSkipCredits: state.enableSkipCredits.state,
+          enableDiscover: state.enableDiscover.state,
+          enableFeatured: state.enableFeatured.state,
+          enableDetailsModal: state.enableDetailsModal.state,
+          enableImageLogos: state.enableImageLogos.state,
+          sourceOrder: state.sourceOrder.state,
+          enableSourceOrder: state.enableSourceOrder.state,
+          proxyTmdb: state.proxyTmdb.state,
+          enableCarouselView: state.enableCarouselView.state,
         });
       }
       if (state.deviceName.changed) {
@@ -279,15 +315,18 @@ export function SettingsPage() {
     setEnableAutoplay(state.enableAutoplay.state);
     setEnableSkipCredits(state.enableSkipCredits.state);
     setEnableDiscover(state.enableDiscover.state);
+    setEnableFeatured(state.enableFeatured.state);
     setEnableDetailsModal(state.enableDetailsModal.state);
+    setEnableImageLogos(state.enableImageLogos.state);
     setSourceOrder(state.sourceOrder.state);
     setAppLanguage(state.appLanguage.state);
     setTheme(state.theme.state);
     setSubStyling(state.subtitleStyling.state);
     setProxySet(state.proxyUrls.state?.filter((v) => v !== "") ?? null);
     setEnableSourceOrder(state.enableSourceOrder.state);
-    setFebboxToken(state.febboxToken.state);
+    setFebboxKey(state.febboxKey.state);
     setProxyTmdb(state.proxyTmdb.state);
+    setEnableCarouselView(state.enableCarouselView.state);
 
     if (state.profile.state) {
       updateProfile(state.profile.state);
@@ -308,12 +347,14 @@ export function SettingsPage() {
     account,
     backendUrl,
     setEnableThumbnails,
-    setFebboxToken,
+    setFebboxKey,
     state,
     setEnableAutoplay,
     setEnableSkipCredits,
     setEnableDiscover,
+    setEnableFeatured,
     setEnableDetailsModal,
+    setEnableImageLogos,
     setSourceOrder,
     setAppLanguage,
     setTheme,
@@ -325,6 +366,7 @@ export function SettingsPage() {
     setBackendUrl,
     setEnableSourceOrder,
     setProxyTmdb,
+    setEnableCarouselView,
   ]);
   return (
     <SubPageLayout>
@@ -382,8 +424,14 @@ export function SettingsPage() {
             setTheme={setThemeWithPreview}
             enableDiscover={state.enableDiscover.state}
             setEnableDiscover={state.enableDiscover.set}
+            enableFeatured={state.enableFeatured.state}
+            setEnableFeatured={state.enableFeatured.set}
             enableDetailsModal={state.enableDetailsModal.state}
             setEnableDetailsModal={state.enableDetailsModal.set}
+            enableImageLogos={state.enableImageLogos.state}
+            setEnableImageLogos={state.enableImageLogos.set}
+            enableCarouselView={state.enableCarouselView.state}
+            setEnableCarouselView={state.enableCarouselView.set}
           />
         </div>
         <div id="settings-captions" className="mt-28">
@@ -398,8 +446,8 @@ export function SettingsPage() {
             setBackendUrl={state.backendUrl.set}
             proxyUrls={state.proxyUrls.state}
             setProxyUrls={state.proxyUrls.set}
-            febboxToken={state.febboxToken.state}
-            setFebboxToken={state.febboxToken.set}
+            febboxKey={state.febboxKey.state}
+            setFebboxKey={state.febboxKey.set}
             proxyTmdb={state.proxyTmdb.state}
             setProxyTmdb={state.proxyTmdb.set}
           />

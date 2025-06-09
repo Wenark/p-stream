@@ -821,5 +821,56 @@
         "episodes": "Folgen",
         "season": "Staffel",
         "runtime": "Laufzeit:"
+    },
+    "discover": {
+        "tabs": {
+            "movies": "Filme",
+            "tvshows": "Serien",
+            "editorpicks": "Empfehlungen der Redaktion"
+        },
+        "carousel": {
+            "title": {
+                "movies": "{{category}} Filme",
+                "tvshows": "{{category}} Serien",
+                "inCinemas": "Im Kino",
+                "popular": "Am beliebtesten",
+                "nowPlaying": "Im Kino",
+                "topRated": "Am besten bewertet",
+                "latestReleases": "Neueste Veröffentlichungen",
+                "4kReleases": "4K-Veröffentlichungen",
+                "onTheAir": "Aktuell im TV",
+                "popularOn": "Beliebte {{type}} auf {{provider}}",
+                "editorPicksMovies": "Redaktionstipps Filme",
+                "editorPicksShows": "Redaktionstipps Serien",
+                "moviesOn": "Filme auf {{provider}}",
+                "tvshowsOn": "Serien auf {{provider}}",
+                "recommended": "Weil du gesehen hast: {{title}}",
+                "genreMovies": "{{genre}} Filme",
+                "genreShows": "{{genre}} Serien",
+                "categoryMovies": "{{category}} Filme",
+                "categoryShows": "{{category}} Serien"
+            },
+            "change": "Ändern",
+            "more": "Mehr anzeigen"
+        },
+        "featured": {
+            "playNow": "Jetzt abspielen",
+            "moreInfo": "Mehr Infos"
+        },
+        "randomMovie": {
+            "button": "Zufälligen Titel abspielen",
+            "cancel": "Countdown abbrechen",
+            "countdown": "{{countdown}}s",
+            "nowPlaying": "Jetzt läuft",
+            "in": "in"
+        },
+        "page": {
+            "title": "Filme & Serien entdecken",
+            "subtitle": "Entdecke aktuelle Highlights und zeitlose Klassiker.",
+            "loadMore": "Mehr laden",
+            "loading": "Lade...",
+            "back": "Zurück"
+        },
+        "scrollToTop": "Nach oben"
     }
 }
