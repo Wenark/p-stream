@@ -44,6 +44,7 @@ export function useSettingsState(
   proxyUrls: string[] | null,
   backendUrl: string | null,
   febboxKey: string | null,
+  realDebridKey: string | null,
   profile:
     | {
         colorA: string;
@@ -62,6 +63,8 @@ export function useSettingsState(
   enableSkipCredits: boolean,
   enableImageLogos: boolean,
   enableCarouselView: boolean,
+  forceCompactEpisodeView: boolean,
+  enableLowPerformanceMode: boolean,
 ) {
   const [proxyUrlsState, setProxyUrls, resetProxyUrls, proxyUrlsChanged] =
     useDerived(proxyUrls);
@@ -69,6 +72,12 @@ export function useSettingsState(
     useDerived(backendUrl);
   const [febboxKeyState, setFebboxKey, resetFebboxKey, febboxKeyChanged] =
     useDerived(febboxKey);
+  const [
+    realDebridKeyState,
+    setRealDebridKey,
+    resetRealDebridKey,
+    realDebridKeyChanged,
+  ] = useDerived(realDebridKey);
   const [themeState, setTheme, resetTheme, themeChanged] = useDerived(theme);
   const setPreviewTheme = usePreviewThemeStore((s) => s.setPreviewTheme);
   const resetPreviewTheme = useCallback(
@@ -153,6 +162,18 @@ export function useSettingsState(
     resetEnableCarouselView,
     enableCarouselViewChanged,
   ] = useDerived(enableCarouselView);
+  const [
+    forceCompactEpisodeViewState,
+    setForceCompactEpisodeViewState,
+    resetForceCompactEpisodeView,
+    forceCompactEpisodeViewChanged,
+  ] = useDerived(forceCompactEpisodeView);
+  const [
+    enableLowPerformanceModeState,
+    setEnableLowPerformanceModeState,
+    resetEnableLowPerformanceMode,
+    enableLowPerformanceModeChanged,
+  ] = useDerived(enableLowPerformanceMode);
 
   function reset() {
     resetTheme();
@@ -162,6 +183,7 @@ export function useSettingsState(
     resetProxyUrls();
     resetBackendUrl();
     resetFebboxKey();
+    resetRealDebridKey();
     resetDeviceName();
     resetProfile();
     resetEnableThumbnails();
@@ -175,6 +197,8 @@ export function useSettingsState(
     resetEnableSourceOrder();
     resetProxyTmdb();
     resetEnableCarouselView();
+    resetForceCompactEpisodeView();
+    resetEnableLowPerformanceMode();
   }
 
   const changed =
@@ -185,6 +209,7 @@ export function useSettingsState(
     backendUrlChanged ||
     proxyUrlsChanged ||
     febboxKeyChanged ||
+    realDebridKeyChanged ||
     profileChanged ||
     enableThumbnailsChanged ||
     enableAutoplayChanged ||
@@ -196,7 +221,9 @@ export function useSettingsState(
     sourceOrderChanged ||
     enableSourceOrderChanged ||
     proxyTmdbChanged ||
-    enableCarouselViewChanged;
+    enableCarouselViewChanged ||
+    forceCompactEpisodeViewChanged ||
+    enableLowPerformanceModeChanged;
 
   return {
     reset,
@@ -235,6 +262,11 @@ export function useSettingsState(
       state: febboxKeyState,
       set: setFebboxKey,
       changed: febboxKeyChanged,
+    },
+    realDebridKey: {
+      state: realDebridKeyState,
+      set: setRealDebridKey,
+      changed: realDebridKeyChanged,
     },
     profile: {
       state: profileState,
@@ -295,6 +327,16 @@ export function useSettingsState(
       state: enableCarouselViewState,
       set: setEnableCarouselViewState,
       changed: enableCarouselViewChanged,
+    },
+    forceCompactEpisodeView: {
+      state: forceCompactEpisodeViewState,
+      set: setForceCompactEpisodeViewState,
+      changed: forceCompactEpisodeViewChanged,
+    },
+    enableLowPerformanceMode: {
+      state: enableLowPerformanceModeState,
+      set: setEnableLowPerformanceModeState,
+      changed: enableLowPerformanceModeChanged,
     },
   };
 }

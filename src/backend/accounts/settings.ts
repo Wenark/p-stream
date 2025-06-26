@@ -9,6 +9,7 @@ export interface SettingsInput {
   defaultSubtitleLanguage?: string;
   proxyUrls?: string[] | null;
   febboxKey?: string | null;
+  realDebridKey?: string | null;
   enableThumbnails?: boolean;
   enableAutoplay?: boolean;
   enableSkipCredits?: boolean;
@@ -17,9 +18,11 @@ export interface SettingsInput {
   enableDetailsModal?: boolean;
   enableImageLogos?: boolean;
   enableCarouselView?: boolean;
+  forceCompactEpisodeView?: boolean;
   sourceOrder?: string[];
   enableSourceOrder?: boolean;
   proxyTmdb?: boolean;
+  enableLowPerformanceMode?: boolean;
 }
 
 export interface SettingsResponse {
@@ -28,6 +31,7 @@ export interface SettingsResponse {
   defaultSubtitleLanguage?: string | null;
   proxyUrls?: string[] | null;
   febboxKey?: string | null;
+  realDebridKey?: string | null;
   enableThumbnails?: boolean;
   enableAutoplay?: boolean;
   enableSkipCredits?: boolean;
@@ -39,6 +43,7 @@ export interface SettingsResponse {
   sourceOrder?: string[];
   enableSourceOrder?: boolean;
   proxyTmdb?: boolean;
+  enableLowPerformanceMode?: boolean;
 }
 
 export function updateSettings(

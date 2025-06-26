@@ -11,10 +11,13 @@ export interface PreferencesStore {
   enableDetailsModal: boolean;
   enableImageLogos: boolean;
   enableCarouselView: boolean;
+  forceCompactEpisodeView: boolean;
   sourceOrder: string[];
   enableSourceOrder: boolean;
   proxyTmdb: boolean;
   febboxKey: string | null;
+  realDebridKey: string | null;
+  enableLowPerformanceMode: boolean;
 
   setEnableThumbnails(v: boolean): void;
   setEnableAutoplay(v: boolean): void;
@@ -24,10 +27,13 @@ export interface PreferencesStore {
   setEnableDetailsModal(v: boolean): void;
   setEnableImageLogos(v: boolean): void;
   setEnableCarouselView(v: boolean): void;
+  setForceCompactEpisodeView(v: boolean): void;
   setSourceOrder(v: string[]): void;
   setEnableSourceOrder(v: boolean): void;
   setProxyTmdb(v: boolean): void;
   setFebboxKey(v: string | null): void;
+  setRealDebridKey(v: string | null): void;
+  setEnableLowPerformanceMode(v: boolean): void;
 }
 
 export const usePreferencesStore = create(
@@ -41,10 +47,13 @@ export const usePreferencesStore = create(
       enableDetailsModal: false,
       enableImageLogos: true,
       enableCarouselView: false,
+      forceCompactEpisodeView: false,
       sourceOrder: [],
       enableSourceOrder: false,
       proxyTmdb: false,
       febboxKey: null,
+      realDebridKey: null,
+      enableLowPerformanceMode: false,
       setEnableThumbnails(v) {
         set((s) => {
           s.enableThumbnails = v;
@@ -85,6 +94,11 @@ export const usePreferencesStore = create(
           s.enableCarouselView = v;
         });
       },
+      setForceCompactEpisodeView(v) {
+        set((s) => {
+          s.forceCompactEpisodeView = v;
+        });
+      },
       setSourceOrder(v) {
         set((s) => {
           s.sourceOrder = v;
@@ -103,6 +117,16 @@ export const usePreferencesStore = create(
       setFebboxKey(v) {
         set((s) => {
           s.febboxKey = v;
+        });
+      },
+      setRealDebridKey(v) {
+        set((s) => {
+          s.realDebridKey = v;
+        });
+      },
+      setEnableLowPerformanceMode(v) {
+        set((s) => {
+          s.enableLowPerformanceMode = v;
         });
       },
     })),

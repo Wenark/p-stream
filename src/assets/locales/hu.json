@@ -848,7 +848,7 @@
                 "urlPlaceholder": "https://",
                 "proxyTMDB": {
                     "title": "Proxy TMDB-hez",
-                    "description": "Csak akkor szükséges, ha nem tudod elérni a TheMovieDB-t közvetlen, például ha az internetszolgáltatód blokkolja. Ajánlott a felfedezés szekció kikapcsolása, a teljesítmény növeléséhez ezzel."
+                    "description": "Csak akkor szükséges, ha nem tudod elérni a TheMovieDB-t közvetlen, például ha az internetszolgáltatód blokkolja. Ajánlott a felfedezés szekció kikapcsolása, a teljesítmény növeléséhez, ha ezt a funkciót használod."
                 },
                 "description": "Az alkalmazás működéséhez az összes forgalom proxykon keresztül halad. Kapcsold be ezt, ha saját munkafolyamataidat (workereidet) szeretnéd használni. <0>Útmutató.</0>"
             }
@@ -935,7 +935,8 @@
                 "editorPicksMovies": "Szerkesztői válogatás filmekből",
                 "categoryMovies": "{{category}} Filmek",
                 "latestReleases": "Legújabbak",
-                "genreMovies": "{{genre}} Filmek"
+                "genreMovies": "{{genre}} Filmek",
+                "latestTVReleases": "Legújabb sorozatok"
             },
             "change": "Módosítás",
             "more": "Mutass többet"
@@ -958,7 +959,9 @@
             "loadMore": "Több betöltése",
             "title": "Fedezz fel filmeket és sorozatokat"
         },
-        "scrollToTop": "Vissza a tetejére"
+        "scrollToTop": "Vissza a tetejére",
+        "allLists": "Összes film listák",
+        "viewLists": "Az összes film lista megnézése"
     },
     "fedapi": {
         "setup": {

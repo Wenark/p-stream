@@ -134,6 +134,9 @@ export function SettingsPage() {
   const febboxKey = usePreferencesStore((s) => s.febboxKey);
   const setFebboxKey = usePreferencesStore((s) => s.setFebboxKey);
 
+  const realDebridKey = usePreferencesStore((s) => s.realDebridKey);
+  const setRealDebridKey = usePreferencesStore((s) => s.setRealDebridKey);
+
   const enableThumbnails = usePreferencesStore((s) => s.enableThumbnails);
   const setEnableThumbnails = usePreferencesStore((s) => s.setEnableThumbnails);
 
@@ -175,6 +178,20 @@ export function SettingsPage() {
     (s) => s.setEnableCarouselView,
   );
 
+  const forceCompactEpisodeView = usePreferencesStore(
+    (s) => s.forceCompactEpisodeView,
+  );
+  const setForceCompactEpisodeView = usePreferencesStore(
+    (s) => s.setForceCompactEpisodeView,
+  );
+
+  const enableLowPerformanceMode = usePreferencesStore(
+    (s) => s.enableLowPerformanceMode,
+  );
+  const setEnableLowPerformanceMode = usePreferencesStore(
+    (s) => s.setEnableLowPerformanceMode,
+  );
+
   const account = useAuthStore((s) => s.account);
   const updateProfile = useAuthStore((s) => s.setAccountProfile);
   const updateDeviceName = useAuthStore((s) => s.updateDeviceName);
@@ -195,10 +212,13 @@ export function SettingsPage() {
         if (settings.febboxKey) {
           setFebboxKey(settings.febboxKey);
         }
+        if (settings.realDebridKey) {
+          setRealDebridKey(settings.realDebridKey);
+        }
       }
     };
     loadSettings();
-  }, [account, backendUrl, setFebboxKey]);
+  }, [account, backendUrl, setFebboxKey, setRealDebridKey]);
 
   const state = useSettingsState(
     activeTheme,
@@ -208,6 +228,7 @@ export function SettingsPage() {
     proxySet,
     backendUrlSetting,
     febboxKey,
+    realDebridKey,
     account ? account.profile : undefined,
     enableThumbnails,
     enableAutoplay,
@@ -220,6 +241,8 @@ export function SettingsPage() {
     enableSkipCredits,
     enableImageLogos,
     enableCarouselView,
+    forceCompactEpisodeView,
+    enableLowPerformanceMode,
   );
 
   const availableSources = useMemo(() => {
@@ -264,6 +287,7 @@ export function SettingsPage() {
         state.theme.changed ||
         state.proxyUrls.changed ||
         state.febboxKey.changed ||
+        state.realDebridKey.changed ||
         state.enableThumbnails.changed ||
         state.enableAutoplay.changed ||
         state.enableSkipCredits.changed ||
@@ -274,13 +298,16 @@ export function SettingsPage() {
         state.sourceOrder.changed ||
         state.enableSourceOrder.changed ||
         state.proxyTmdb.changed ||
-        state.enableCarouselView.changed
+        state.enableCarouselView.changed ||
+        state.forceCompactEpisodeView.changed ||
+        state.enableLowPerformanceMode.changed
       ) {
         await updateSettings(backendUrl, account, {
           applicationLanguage: state.appLanguage.state,
           applicationTheme: state.theme.state,
           proxyUrls: state.proxyUrls.state?.filter((v) => v !== "") ?? null,
           febboxKey: state.febboxKey.state,
+          realDebridKey: state.realDebridKey.state,
           enableThumbnails: state.enableThumbnails.state,
           enableAutoplay: state.enableAutoplay.state,
           enableSkipCredits: state.enableSkipCredits.state,
@@ -292,6 +319,8 @@ export function SettingsPage() {
           enableSourceOrder: state.enableSourceOrder.state,
           proxyTmdb: state.proxyTmdb.state,
           enableCarouselView: state.enableCarouselView.state,
+          forceCompactEpisodeView: state.forceCompactEpisodeView.state,
+          enableLowPerformanceMode: state.enableLowPerformanceMode.state,
         });
       }
       if (state.deviceName.changed) {
@@ -325,8 +354,11 @@ export function SettingsPage() {
     setProxySet(state.proxyUrls.state?.filter((v) => v !== "") ?? null);
     setEnableSourceOrder(state.enableSourceOrder.state);
     setFebboxKey(state.febboxKey.state);
+    setRealDebridKey(state.realDebridKey.state);
     setProxyTmdb(state.proxyTmdb.state);
     setEnableCarouselView(state.enableCarouselView.state);
+    setForceCompactEpisodeView(state.forceCompactEpisodeView.state);
+    setEnableLowPerformanceMode(state.enableLowPerformanceMode.state);
 
     if (state.profile.state) {
       updateProfile(state.profile.state);
@@ -348,6 +380,7 @@ export function SettingsPage() {
     backendUrl,
     setEnableThumbnails,
     setFebboxKey,
+    setRealDebridKey,
     state,
     setEnableAutoplay,
     setEnableSkipCredits,
@@ -367,6 +400,8 @@ export function SettingsPage() {
     setEnableSourceOrder,
     setProxyTmdb,
     setEnableCarouselView,
+    setForceCompactEpisodeView,
+    setEnableLowPerformanceMode,
   ]);
   return (
     <SubPageLayout>
@@ -415,6 +450,8 @@ export function SettingsPage() {
             setSourceOrder={state.sourceOrder.set}
             enableSourceOrder={state.enableSourceOrder.state}
             setenableSourceOrder={state.enableSourceOrder.set}
+            enableLowPerformanceMode={state.enableLowPerformanceMode.state}
+            setEnableLowPerformanceMode={state.enableLowPerformanceMode.set}
           />
         </div>
         <div id="settings-appearance" className="mt-28">
@@ -432,6 +469,9 @@ export function SettingsPage() {
             setEnableImageLogos={state.enableImageLogos.set}
             enableCarouselView={state.enableCarouselView.state}
             setEnableCarouselView={state.enableCarouselView.set}
+            forceCompactEpisodeView={state.forceCompactEpisodeView.state}
+            setForceCompactEpisodeView={state.forceCompactEpisodeView.set}
+            enableLowPerformanceMode={state.enableLowPerformanceMode.state}
           />
         </div>
         <div id="settings-captions" className="mt-28">
@@ -448,6 +488,8 @@ export function SettingsPage() {
             setProxyUrls={state.proxyUrls.set}
             febboxKey={state.febboxKey.state}
             setFebboxKey={state.febboxKey.set}
+            realDebridKey={state.realDebridKey.state}
+            setRealDebridKey={state.realDebridKey.set}
             proxyTmdb={state.proxyTmdb.state}
             setProxyTmdb={state.proxyTmdb.set}
           />

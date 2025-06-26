@@ -187,6 +187,14 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
               errorName: data.error.name,
               type: "hls",
             });
+          } else if (data.details === "manifestLoadError") {
+            // Handle manifest load errors specifically
+            emit("error", {
+              message: "Failed to load HLS manifest",
+              stackTrace: data.error?.stack || "",
+              errorName: data.error?.name || "ManifestLoadError",
+              type: "hls",
+            });
           }
         });
         hls.on(Hls.Events.MANIFEST_LOADED, () => {
@@ -388,14 +396,7 @@ export function makeVideoElementDisplayInterface(): DisplayInterface {
       containerElement = container;
     },
     setMeta() {},
-    setCaption(caption) {
-      // If we have a video element and captions are available,
-      // set up the tracks - AirPlay requires VTT format
-      if (videoElement && caption && caption.srtData) {
-        // Subtitles are handled via the track element in VideoContainer.tsx
-        // convertSubtitlesToObjectUrl already handles the conversion to VTT
-      }
-    },
+    setCaption() {},
 
     pause() {
       videoElement?.pause();
