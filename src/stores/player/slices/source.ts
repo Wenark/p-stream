@@ -1,4 +1,4 @@
-import { ScrapeMedia } from "@movie-web/providers";
+import { ScrapeMedia } from "@p-stream/providers";
 
 import { MakeSlice } from "@/stores/player/slices/types";
 import {
@@ -53,9 +53,16 @@ export interface CaptionListItem {
   id: string;
   language: string;
   url: string;
+  type?: string;
   needsProxy: boolean;
   hls?: boolean;
   opensubtitles?: boolean;
+  // subtitle details from wyzie
+  display?: string;
+  media?: string;
+  isHearingImpaired?: boolean;
+  source?: string;
+  encoding?: string;
 }
 
 export interface AudioTrack {

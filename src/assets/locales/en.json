@@ -140,7 +140,8 @@
   },
   "actions": {
     "copied": "Copied",
-    "copy": "Copy"
+    "copy": "Copy",
+    "cancel": "Cancel"
   },
   "auth": {
     "createAccount": "Don't have an account yet 😬 <0>Create an account.</0>",
@@ -150,7 +151,13 @@
       "description": "Your passphrase acts as your username and password. Make sure to keep it safe as you will need to enter it to login to your account. <bold>Do NOT lose your passphrase!</bold>",
       "next": "I have saved my passphrase",
       "passphraseFrameLabel": "Passphrase",
-      "title": "Your passphrase"
+      "title": "Your passphrase",
+      "custom": "Custom",
+      "customPassphraseLabel": "Custom Passphrase",
+      "customPassphrasePlaceholder": "Enter your custom passphrase",
+      "useCustomPassphrase": "Use Custom Passphrase",
+      "invalidPassphraseCharacters": "Invalid passphrase characters. Only English letters, numbers 1-10, and normal symbols are allowed.",
+      "passphraseTooShort": "Passphrase must be at least 8 characters long."
     },
     "hasAccount": "Already have an account? <0>Login here.</0>",
     "login": {
@@ -208,7 +215,7 @@
     },
     "links": {
       "discord": "Discord",
-      "dmca": "DMCA",
+      "legal": "Legal / DMCA",
       "github": "GitHub",
       "twitter": "Twitter",
       "funding": "Support us"
@@ -219,7 +226,7 @@
     "name": "P-Stream",
     "pages": {
       "about": "About and FAQ",
-      "dmca": "DMCA",
+      "legal": "Legal / DMCA",
       "discover": "Discover",
       "support": "Support",
       "login": "Login",
@@ -397,7 +404,8 @@
       "status": {
         "processing": "Processing data...",
         "error": "Failed to upload your data. 😿",
-        "success": "Your data has been uploaded successfully! 🎉"
+        "success": "Your data has been uploaded successfully! 🎉",
+        "successLocal": "Your data has been saved locally! 🎉"
       },
       "file": {
         "description": "Select the file you want to upload",
@@ -415,7 +423,8 @@
         "import": "Import data",
         "processing": "Processing...",
         "success": "Import complete",
-        "home": "Continue to home"
+        "home": "Continue to home",
+        "saveLocal": "Save locally"
       }
     },
     "back": "Go back"
@@ -503,8 +512,8 @@
           "default": "3. Default Setup",
           "defaultDescription": "Uses P-Stream's built-in proxy. It's the easiest option but might be slower due to shared bandwidth.",
           "fedapi": {
-            "fedapi": "Additional: FED API (Private) token",
-            "fedapiDescription": "Bring your own FREE Febbox account to gain access to FED API (Private), the best source with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!"
+            "fedapi": "Additional: Febbox token",
+            "fedapiDescription": "Bring your own FREE Febbox account to gain access to FED API and CIA API, the best sources with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!"
           },
           "outro": "If you have more questions on how this works, feel free to ask on the <0>P-Stream Discord</0> server!"
         },
@@ -513,15 +522,15 @@
           "subtitle": "Recommended Configurations:",
           "desktop": {
             "title": "Desktop:",
-            "description": "Extension + FED API (Private)"
+            "description": "Extension + Febbox token"
           },
           "iOS": {
             "title": "iOS:",
-            "description": "Custom proxy + FED API (Private)"
+            "description": "Custom proxy + Febbox token"
           },
           "android": {
             "title": "Android:",
-            "description": "Extension + FED API (Private)"
+            "description": "Extension + Febbox token"
           }
         }
       },
@@ -598,7 +607,9 @@
         "unairedEpisodes": "One or more episodes in this season have been disabled because they haven't been aired yet.",
         "seasons": "Seasons",
         "showMore": "Show more",
-        "showLess": "Show less"
+        "showLess": "Show less",
+        "markAsWatched": "Mark as watched",
+        "markAsUnwatched": "Mark as unwatched"
       },
       "playback": {
         "speedLabel": "Playback speed",
@@ -675,7 +686,7 @@
         "text": "Could not load API metadata, please check your internet connection.",
         "title": "Failed to load API metadata"
       },
-      "dmca": {
+      "legal": {
         "badge": "Removed",
         "text": "This media is no longer available due to a takedown notice or copyright claim. 😨",
         "title": "Media has been removed"
@@ -800,8 +811,8 @@
     }
   },
   "screens": {
-    "dmca": {
-      "title": "DMCA"
+    "legal": {
+      "title": "Legal / DMCA"
     },
     "loadingApp": "Loading application",
     "loadingUser": "Loading your profile",
@@ -1080,8 +1091,8 @@
   },
   "fedapi": {
     "onboarding": {
-      "title": "FED API (Private) token",
-      "description": "Bring your own FREE Febbox account to gain access to FED API (Private), the best source with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!"
+      "title": "Febbox token",
+      "description": "Bring your own FREE Febbox account to gain access to FED API and CIA API, the best sources with 4K quality, Dolby Atmos, skip intro and the fastest load times! Highly recommended option!"
     },
     "setup": {
       "title": "To get your UI token:",
@@ -1091,9 +1102,17 @@
         "1": "1. Go to <0>febbox.com</0> and log in with Google (use a fresh account!)",
         "2": "2. Open DevTools or inspect the page",
         "3": "3. Go to Application tab → Cookies",
-        "4": "4. Copy the 'ui' cookie.",
+        "4": "4. Copy the 'ui' cookie's value.",
         "5": "5. Close the tab, but do NOT logout!",
         "warning": "(Do not share this token!)"
+      },
+      "tokenLabel": "Token",
+      "tokenExample": {
+        "button": "(Example)",
+        "title": "Example Token",
+        "description": "This is what a Febbox UI token looks like:",
+        "warning": "Don't try to use, it's fake.",
+        "close": "Got it"
       }
     },
     "status": {

@@ -83,7 +83,7 @@ function MediaCardContent({
     <Flare.Base
       className={`group -m-[0.705em] rounded-xl bg-background-main transition-colors duration-300 focus:relative focus:z-10 ${
         canLink ? "hover:bg-mediaCard-hoverBackground tabbable" : ""
-      }`}
+      } ${closable ? "jiggle" : ""}`}
       tabIndex={canLink ? 0 : -1}
       onKeyUp={(e) => e.key === "Enter" && e.currentTarget.click()}
     >
@@ -268,6 +268,11 @@ export function MediaCard(props: MediaCardProps) {
     }
   };
 
+  const handleCardContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleShowDetails();
+  };
+
   const content = (
     <>
       <MediaCardContent {...props} onShowDetails={handleShowDetails} />
@@ -284,6 +289,7 @@ export function MediaCard(props: MediaCardProps) {
             e.preventDefault();
           }
         }}
+        onContextMenu={handleCardContextMenu}
       >
         {content}
       </span>
@@ -299,6 +305,7 @@ export function MediaCard(props: MediaCardProps) {
         props.closable ? "hover:cursor-default" : "",
       )}
       onClick={handleCardClick}
+      onContextMenu={handleCardContextMenu}
     >
       {content}
     </Link>
